@@ -1,0 +1,19 @@
+name: test
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq lua5.3
+      - name: .lua and .qplug are identical
+        run: cmp webhook-bridge.lua webhook-bridge.qplug
+      - name: Simulation
+        run: lua5.3 tests/sim.lua webhook-bridge.qplug
+      - name: Lint
+        uses: Yara162/Q-SYS-Plugin-Linter@v0.1.0
+        with:
+          files: webhook-bridge.qplug
+          fail-on: warning
