@@ -13,7 +13,7 @@ jobs:
       - name: Simulation
         run: lua5.3 tests/sim.lua webhook-bridge.qplug
       - name: Lint
-        uses: Yara162/Q-SYS-Plugin-Linter@v0.1.0
+        uses: Yara162/Q-SYS-Plugin-Linter@main
         with:
           files: webhook-bridge.qplug
           fail-on: warning
